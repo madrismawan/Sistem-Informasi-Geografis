@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="Website Testing Sistem Geografis" content="">
+    <meta name="Rismawan">
+    <title>GIS Made Rismawan</title>
+    <link href="assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/colors/blue.css" id="theme" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">  
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-toggleable-sm navbar-light">
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto mt-md-0"></ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" >1805551114 | I Made Rismawan Nugraha   </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>   
+        <div class="page">
+             <div class="container-fluid">
+                <div class="row page-titles">
+                    <div class="col-md-5 col-8 align-self-center">
+                        <h3 class="text-themecolor m-b-0 m-t-0">Informasi Latitudes & Longitudes</h3>
+                        <ol class="breadcrumb">
+                            <li id="info" class="breadcrumb-item active">Koordinat :(.............. , .............)</li>
+                        </ol>
+                    </div>
+                </div>
+            
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-block">
+                                <h4 class="card-title">Sistem Informasi Geografis Web dan Mobile</h4>
+                                <div id="gmaps"  style="height: 450px;"> </div>                             
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            
+            var popup2 = L.popup();
+
+            var mymap = L.map('gmaps').setView([-8.606093, 115.173177], 13);
+
+            L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+                attribution: 'Adalah API Favoritku',
+                maxZoom: 18,
+                id: 'mapbox/streets-v11',
+                tileSize: 512,
+                zoomOffset: -1,
+                accessToken: 'pk.eyJ1IjoibWFkZXJpc21hd2FuIiwiYSI6ImNrbGNqMzZ0dDBteHIyb21ydTRqNWQ4MXAifQ.YyTGDJLfKwwufNRVYUdvig'
+            }).addTo(mymap);
+
+            var marker = L.marker([-8.606093, 115.173177],{
+                draggable: "true"
+            }).addTo(mymap);
+
+            var UnivDhayanaPura = L.marker([-8.629243, 115.177115]).addTo(mymap);
+            var tunasDaud = L.marker([-8.625149, 115.18503]).addTo(mymap);
+            var TamanRama = L.marker([-8.620292, 115.197648]).addTo(mymap);
+            var sdDalung = L.marker([-8.624969, 115.170409]).addTo(mymap);
+            var HighScope = L.marker([-8.639802,115.180682]).addTo(mymap);
+            var kalamKudus = L.marker([-8.640326, 115.174625]).addTo(mymap);
+            var Paud = L.marker([-8.641512, 115.182617]).addTo(mymap);
+            
+            // var addMarker = [];
+            // i = 0;
+            // addMarker [i+1] = L.marker([
+            //     [-8.629243, 115.177115],
+            //     [-8.625149, 115.18503],
+            //     [-8.620292, 115.197648]
+            // ]).addTo(mymap);
+
+            
+            mymap.on('mousemove',function(e){
+                document.getElementById("info").innerHTML="Koordinat :("+e.latlng.lat+","+e.latlng.lng+")";
+            });
+
+
+            mymap.on('dblclick',function(e){
+                var ulangi = confirm("Apakah anda ingin menambahkan marker?");
+                if(ulangi!=true){
+                    alert('GOBLOG!!!!');
+                }else{
+                    i = 0;
+                    var addMarker = [];
+                    addMarker[i+1] = L.marker([e.latlng.lat,e.latlng.lng]).addTo(mymap);
+                }
+                
+            });
+
+            //------ Nyoba Membuat Circle-------/
+            // var circle = L.circle([-8.606093, 115.173177], {
+            //     color: 'red',
+            //     fillColor: '#f03',
+            //     fillOpacity: 0.5,
+            //     radius: 300
+            // }).addTo(mymap);
+            
+            // Event Mouse Klik Kanan dan Kiri //
+            // mymap.on('click',function(e){
+            //     alert('Anda Melakukan Klik Pada Koordinat :' + e.latlng);
+            // })
+
+            // mymap.on('contextmenu',function(e){
+            //     alert('Anda Melakukan Klik Kanan Pada Koordinat :' + e.latlng);
+            // })
+            // END Mouse Event Klik //
+
+
+            // marker.on('click',function(e){
+            //     marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+            // })
+
+
+            marker.on('click',function(e){
+                marker.bindPopup("<b>Koordinat Tengah</b><br>Perumahan Cemara Giri Graha.").openPopup();
+                popup.openOn(mymap);
+            })
+            UnivDhayanaPura.on('click',function(e){
+                UnivDhayanaPura.bindPopup("<b>Nama : Universitas Dhayana Pura</b><br>Katagori : Universitas").openPopup();
+                popup.openOn(mymap);
+            })
+            sdDalung.on('click',function(e){
+                sdDalung.bindPopup("<b>Nama : SD Dalung </b> <br> Katagori : Sekolah Dasar").openPopup();
+                popup.openOn(mymap);
+            })
+            tunasDaud.on('click',function(e){
+                tunasDaud.bindPopup("<b>Nama : Sekolah Tunas Daud </b> <br> Katagori : Sekolah Dasar").openPopup();
+                popup.openOn(mymap);
+            })
+            TamanRama.on('click',function(e){
+                TamanRama.bindPopup("<b>Nama : Taman Rama Gandhi School </b> <br> Katagori : Sekolah Dasar").openPopup();
+                popup.openOn(mymap);
+            })
+            Paud.on('click',function(e){
+                Paud.bindPopup("<b>Nama : Paud Bali Permata Hati </b> <br> Katagori : Paud").openPopup();
+                popup.openOn(mymap);
+            })
+            HighScope.on('click',function(e){
+                HighScope.bindPopup("<b>Nama : Sekolah HighScope Bali </b> <br> Katagori : Sekolah Dasar - Sekolah Menengah Atas").openPopup();
+                popup.openOn(mymap);
+            })
+            kalamKudus.on('click',function(e){
+                kalamKudus.bindPopup("<b>Nama : Sekolah Kristen Kalam Kudus </b> <br> Katagori : Sekolah Dasar").openPopup();
+                popup.openOn(mymap);
+            })
+            
+        </script>    
+    </div>
+
+    <script src="assets/plugins/jquery/jquery.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/tether.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/jquery.slimscroll.js"></script>
+    <script src="js/waves.js"></script>
+    <script src="js/sidebarmenu.js"></script>
+    <script src="assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&sensor=true"></script>
+    <script src="assets/plugins/gmaps/gmaps.min.js"></script>
+    <script src="assets/plugins/gmaps/jquery.gmaps.js"></script>
+</body>
+
+</html>
